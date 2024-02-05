@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="objekterStyling.css">
+    </head>
+    <body id="bord"></body>
+</html>
+<script>
+let bordEl = document.querySelector("#bord")
+let tileArray = [];
+
+    for (i=0;i<36;i++){
+        let tileEl = document.createElement("div")
+        tileEl.dataset.klasse = "baseTile";
+        tileEl.dataset.status = "hidden";
+        bordEl.appendChild(tileEl)
+    }
+
+
+
+function clickHandler(){
+    console.log("hei")
+}
+
+</script>
+
+<style>
+
+</style>
