@@ -8,12 +8,16 @@
 div[data-klasse="baseTile"] {
     display: flex;
     border: 1px solid black;
+    align-items: center;
+    justify-content: center;
 }
 [data-status="hidden"]{
     margin: 5px;
-    background-color: aqua;
+    background-color: rgb(51, 30, 30);
+    transition-duration: 1s;
 }
 [data-status="open"]{
     margin: 5px;
-    background-color: blue;
+    background-color: lightblue;
+    transition-duration: 1s;
 }
