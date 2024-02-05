@@ -5,21 +5,27 @@
     <body id="bord"></body>
 </html>
 <script>
-let bordEl = document.querySelector("#bord")
-let tileArray = [];
+// henter inn elementer    
+    let bordEl = document.querySelector("#bord")
 
+// Variabler
+    let tempArr = [];
+
+// genererer <div> elementer
     for (i=0;i<36;i++){
         let tileEl = document.createElement("div")
         tileEl.dataset.klasse = "baseTile";
         tileEl.dataset.status = "hidden";
+        tileEl.dataset.posisjon = [i];
+        tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
 
 
-
-function clickHandler(){
-    console.log("hei")
-}
+// bytter data-status på clicket element til "open";
+    function clickHandler(a){
+        this.setAttribute('data-status', "open");
+    }
 
 </script>
 
