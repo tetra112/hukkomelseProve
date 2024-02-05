@@ -1,0 +1,19 @@
+#bord {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-columns: repeat(6,1fr);
+    border: 1px solid black;
+}
+div[data-klasse="baseTile"] {
+    display: flex;
+    border: 1px solid black;
+}
+[data-status="hidden"]{
+    margin: 5px;
+    background-color: aqua;
+}
+[data-status="open"]{
+    margin: 5px;
+    background-color: blue;
+}
