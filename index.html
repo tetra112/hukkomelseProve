@@ -1,1 +1,53 @@
+<<<<<<< HEAD
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <link rel="script" href="script.js">
+    </head>
+    <body id="bord">
+        
+    </body>
+</html>
+<script>
+let bordEl = document.querySelector("#bord")
+let tileArray = [];
+
+    for (i=0;i<36;i++){
+        let tileEl = document.createElement("div")
+        tileEl.dataset.klasse = "baseTile";
+        tileEl.dataset.status = "hidden";
+        tileEl.addEventListener("click",()=> dataset.status="open")
+        tileArray.push(tileEl)
+        bordEl.appendChild(tileEl)
+    }
+
+
+
+</script>
+
+<style>
+#bord {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-columns: repeat(6,1fr);
+    border: 1px solid black;
+}
+div[data-klasse="baseTile"] {
+    display: flex;
+    border: 1px solid black;
+}
+[data-status="hidden"]{
+    margin: 5px;
+    background-color: aqua;
+}
+[data-status="open"]{
+    margin: 5px;
+    background-color: blue;
+}
+</style>
+<!--hallo-->
+=======
 Hello World
+>>>>>>> 24c4725eba52d6e7f2e452f69c0ab214be3a48f2
