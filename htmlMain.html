@@ -1,13 +1,19 @@
-<html>
+<!DOCTYPE html>
+<html lang="no">
     <head>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="objekterStyling.css">
     </head>
-    <body id="bord"></body>
+        <body id="screen">
+            <div id="bord"></div>
+        </body>
 </html>
 <script>
 // henter inn elementer    
-    let bordEl = document.querySelector("#bord")
+    let screenEl = document.querySelector("#screen")
 
+    let bordEl = document.querySelector("#bord")
+    screenEl.appendChild(bordEl)
 // Variabler
     let tempArr = [];
 
@@ -21,46 +27,54 @@
         bordEl.appendChild(tileEl)
     }
 
-
-
-
 // bytter data-status på clicket element til "open"
 // setter også verdien på data-objekt som innerHTML
     function clickHandler(a){
-        this.setAttribute('data-status', "open");
-// tempy = hva som skal være avbildet på et åpnet kort, lagret som verdien i 'data-objekt'
-        let tempy = this.getAttribute('data-objekt')
-        this.innerHTML = tempy;
-        var antallOpenEl = document.querySelectorAll('[data-status="open"]')
-
-    // etter at let tempy vises i tilen, venter den 1sec før den kjekker om de er like.     
-        setTimeout(()=>{
-    // vis 2 elementer er åpne kjør følgende:
-        if(antallOpenEl.length == 2){
-    // ser hvordan type objekt det er
-            tempf1 = antallOpenEl[0].getAttribute('data-objekt');
-            tempf2 = antallOpenEl[1].getAttribute('data-objekt');
-    // vis objekt verdien er forskjellige: setter dem som hidden, uten tekst i midten        
-            if(tempf1 != tempf2){
-                antallOpenEl[0].setAttribute('data-status',"hidden")
-                antallOpenEl[0].innerHTML = "";
-                antallOpenEl[1].setAttribute('data-status',"hidden")
-                antallOpenEl[1].innerHTML = "";
-    // vis objekt verdien er lik: setter statusen dems som låst 
-            }else if(tempf1 == tempf2){
-                antallOpenEl[0].setAttribute('data-status',"locked")
-                antallOpenEl[1].setAttribute('data-status',"locked")
+        let checkLocked = this.getAttribute('data-status')
+        if(checkLocked == 'locked'){
+            console.log("locked")
+        }else{
+            this.setAttribute('data-status', "open");
+            this.innerHTML = this.getAttribute('data-objekt');
+            var antallOpenEl = document.querySelectorAll('[data-status="open"]')
+    
+            if(antallOpenEl.length == 2){ // vis 2 elementer er åpne kjør følgende:
+                testLol(antallOpenEl)
+            }else if(antallOpenEl.length > 2){
+                for(i=0;i<antallOpenEl.length;i++){
+                    antallOpenEl[i].setAttribute('data-status',"hidden")
+                    antallOpenEl[i].innerHTML = "";
+                } 
             }
-        }
-    }, 500) // 1000 = antall millisekunder den venter
+    } 
 }
+// kjekker om 2 åpna tiles er samme objekt, og bytter status
+    function testLol(array){   
+                tempf1 = array[0].getAttribute('data-objekt');
+                tempf2 = array[1].getAttribute('data-objekt');
+        // vis objekt verdien er forskjellige: setter dem som hidden, uten tekst i midten        
+                if(tempf1 != tempf2){
+                    setTimeout(()=>{
+                        array[0].setAttribute('data-status',"hidden")
+                        array[0].innerHTML = "";
+                        array[1].setAttribute('data-status',"hidden")
+                        array[1].innerHTML = "";
+                    },500)                                             // <- antall milisekunder tilen skal vises før den blir 'hidden' 
+        // vis objekt verdien er lik: setter statusen dems som låst 
+                }else if(tempf1 == tempf2){
+                    array[0].setAttribute('data-status',"locked")
+                    array[1].setAttribute('data-status',"locked")
+                }
+            }        
+
 
 // funkjon som shufftler input arrayen 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
-        }
+        }    
+        linkDivVerdi()
     }
 
 
@@ -84,26 +98,6 @@
         }
     }
 
-// sammenligner clicka tiles
-    function blabla(){
-        var temp123 = document.querySelectorAll('[data-status="open"]')
-        if(temp123.length == 1){
-            tempf1 = temp123[0].getAttribute('data-objekt');
-            tempf2 = temp123[1].getAttribute('data-objekt');
-            if(tempf1 != tempf2){
-                temp123[0].setAttribute('data-status',"hidden")
-                temp123[0].innerHTML = "";
-                temp123[1].setAttribute('data-status',"hidden")
-                temp123[1].innerHTML = "";
-            }
-        }
-    }
-
 // kjører funksjoner
     genVerdier()
-    linkDivVerdi()
 </script>
-
-<style>
-
-</style>
