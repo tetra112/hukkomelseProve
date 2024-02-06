@@ -8,8 +8,8 @@
 }
 #bord {
     display: grid;
-    width: 750px;
-    height: 750px;
+    width: 500px;
+    height: 500px;
     grid-template-columns: repeat(6,1fr);
     border: 1px solid black;
 
