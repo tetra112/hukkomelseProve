@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="no">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="objekterStyling.css">
+    </head>
+        <body id="screen">
+            <div id="bord"></div>
+        </body>
+</html>
+<script>
+// henter inn elementer    
+    let screenEl = document.querySelector("#screen")
+
+    let bordEl = document.querySelector("#bord")
+    screenEl.appendChild(bordEl)
+// Variabler
+    let tempArr = [];
+
+// genererer <div> elementer
+    for (i=0;i<36;i++){
+        let tileEl = document.createElement("div")
+        tileEl.dataset.klasse = "baseTile";
+        tileEl.dataset.status = "hidden";
+        tileEl.dataset.posisjon = [i];
+        tileEl.addEventListener("click",clickHandler)
+        bordEl.appendChild(tileEl)
+    }
+
+// bytter data-status på clicket element til "open"
+// setter også verdien på data-objekt som innerHTML
+    function clickHandler(a){
+        let checkLocked = this.getAttribute('data-status')
+        if(checkLocked == 'locked'){
+            console.log("locked")
+        }else{
+            this.setAttribute('data-status', "open");
+            this.innerHTML = this.getAttribute('data-objekt');
+            var antallOpenEl = document.querySelectorAll('[data-status="open"]')
+    
+            if(antallOpenEl.length == 2){ // vis 2 elementer er åpne kjør følgende:
+                testLol(antallOpenEl)
+            }else if(antallOpenEl.length > 2){
+                for(i=0;i<antallOpenEl.length;i++){
+                    antallOpenEl[i].setAttribute('data-status',"hidden")
+                    antallOpenEl[i].innerHTML = "";
+                } 
+            }
+    } 
+}
+// kjekker om 2 åpna tiles er samme objekt, og bytter status
+    function testLol(array){   
+                tempf1 = array[0].getAttribute('data-objekt');
+                tempf2 = array[1].getAttribute('data-objekt');
+        // vis objekt verdien er forskjellige: setter dem som hidden, uten tekst i midten        
+                if(tempf1 != tempf2){
+                    setTimeout(()=>{
+                        array[0].setAttribute('data-status',"hidden")
+                        array[0].innerHTML = "";
+                        array[1].setAttribute('data-status',"hidden")
+                        array[1].innerHTML = "";
+                    },500)                                             // <- antall milisekunder tilen skal vises før den blir 'hidden' 
+        // vis objekt verdien er lik: setter statusen dems som låst 
+                }else if(tempf1 == tempf2){
+                    array[0].setAttribute('data-status',"locked")
+                    array[1].setAttribute('data-status',"locked")
+                }
+            }        
+
+
+// funkjon som shufftler input arrayen 
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }    
+        linkDivVerdi()
+    }
+
+
+// lager en Array med dupliserte tall fra 1-18 + caller på shuffleArray funksjonen
+    function genVerdier(){
+        tempArray=[];
+        for(i=0;i<18;i++){
+            pushTemp = i+1;
+            tempArray.push(pushTemp);
+            tempArray.push(pushTemp);
+        }
+        shuffleArray(tempArray)
+    }
+
+
+// gir verdien til <div> elementene
+    function linkDivVerdi(){
+        for(i=0;i<36;i++){
+            var baseTileArr = document.querySelectorAll('[data-klasse="baseTile"]')
+            baseTileArr[i].setAttribute("data-objekt",tempArray[i])
+        }
+    }
+
+// kjører funksjoner
+    genVerdier()
+</script>
