@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body id="bord">
+        
+    </body>
+</html>
+<script>
+let bordEl = document.querySelector("#bord")
+let tileArray = [];
+let array1 = []
+let array2 = []
+
+async function getAPI(){
+    let cardsAPI = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=18");
+    let cardsJson = await cardsAPI.json();
+    let cards = cardsJson.cards
+}
+for (i=0; i<cards.length; i++){
+    array1.push(cards.value)
+}
+
+    for (i=0;i<36;i++){
+        let tileEl = document.createElement("div")
+        tileEl.dataset.klasse = "baseTile";
+        tileEl.dataset.status = "hidden";
+        tileEl.addEventListener("click",()=> dataset.status="open")
+        tileArray.push(tileEl)
+        bordEl.appendChild(tileEl)
+    }
+
+
+
+</script>
+
+<style>
+#bord {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-columns: repeat(6,1fr);
+    border: 1px solid black;
+}
+div[data-klasse="baseTile"] {
+    display: flex;
+    border: 1px solid black;
+}
+[data-status="hidden"]{
+    margin: 5px;
+    background-color: aqua;
+}
+[data-status="open"]{
+    margin: 5px;
+    background-color: blue;
+}
+</style>
