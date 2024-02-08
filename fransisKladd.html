@@ -2,7 +2,7 @@
 <html lang="no">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="objekterStyling.css">
+        <link rel="stylesheet" href="test.css">
         <script src="genererObjektVerdi.js"></script>
         <script src="clickHandlerScript.js"></script>
     </head>
@@ -25,14 +25,38 @@
         tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
+
+// genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
+    genVerdier() 
+
 // lager boxen som viser antall trykka elementer
     let antallTrykkVar = 0;
     let antallForsokEl = document.createElement("div");
     antallForsokEl.setAttribute('data-klasse',"antallTrykkBox")
     antallForsokEl.innerHTML = antallTrykkVar;
     screenEl.appendChild(antallForsokEl)
+    
+// lager knapp som skal starte ett nytt spill
+    let nyttSpillEl = document.createElement("div");
+    nyttSpillEl.setAttribute('data-klasse', "nyttSpill")
+    nyttSpillEl.innerHTML = `<h2>Nytt spill</h2>`
+    screenEl.appendChild(nyttSpillEl)
+    nyttSpillEl.addEventListener("click", nyttSpill)
 
+//funksjonen som skal starte spillet på nytt (laster alt på nytt)
+    function nyttSpill(){
+        bordEl.innerHTML = ""
 
-// genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
-    genVerdier() 
+        for (i=0;i<36;i++){
+        let tileEl = document.createElement("div")
+        tileEl.dataset.klasse = "baseTile";
+        tileEl.dataset.status = "hidden";
+        tileEl.dataset.posisjon = [i];
+        tileEl.addEventListener("click",clickHandler)
+        bordEl.appendChild(tileEl)
+    }
+    genVerdier()
+    antallTrykkVar = 0
+    antallForsokEl.innerHTML = antallTrykkVar
+    }
 </script>

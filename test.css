@@ -26,6 +26,33 @@
     width: 100px;
     border: 1px solid black;
 }
+[data-klasse="nyttSpill"]{
+    display: flex;
+    grid-column-start: 1;
+    justify-self: right;
+    border: 2px solid black;
+    outline: 1px white solid;
+    outline-offset: -3px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    padding: 1rem;
+    height: auto;
+    width: auto;
+    background-color: lightcyan;
+}
+[data-klasse="nyttSpill"]:hover{
+    transition-duration: 0.5s;
+    background-color: greenyellow;
+    cursor:pointer;
+}
+[data-klasse="nyttSpill"] > h2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    font-size: 2.5rem;
+    -webkit-text-stroke: 1px white;
+}
 [data-klasse="baseTile"] {
     display: flex;
     border: 1px solid black;
