@@ -16,10 +16,10 @@ function clickHandler(a){
         }else if(antallOpenEl.length > 2){
             for(i=0;i<antallOpenEl.length;i++){
                 antallOpenEl[i].setAttribute('data-status',"hidden")
-                antallOpenEl[i].innerHTML = "";
             } 
         }
-    } 
+    }
+    checkVictory() 
 }
 
 // opdaterer antallForsok
@@ -36,9 +36,7 @@ function sammenlignF(array){
             if(tempf1 != tempf2){
                 setTimeout(()=>{
                     array[0].setAttribute('data-status',"hidden")
-                    array[0].innerHTML = "";
                     array[1].setAttribute('data-status',"hidden")
-                    array[1].innerHTML = "";
                 },500)                                             // <- antall milisekunder tilen skal vises før den blir 'hidden' 
     // vis objekt verdien er lik: setter statusen dems som låst 
             }else if(tempf1 == tempf2){
@@ -46,3 +44,10 @@ function sammenlignF(array){
                 array[1].setAttribute('data-status',"locked")
             }
         }        
+
+function checkVictory(){
+    let lockedEl = document.querySelectorAll('[data-status="locked"]')
+    if(lockedEl.length == 36){
+        seierF()
+    }
+}

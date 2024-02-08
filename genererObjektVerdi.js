@@ -25,5 +25,6 @@ function linkDivVerdi(){
     for(i=0;i<36;i++){
         var baseTileArr = document.querySelectorAll('[data-klasse="baseTile"]')
         baseTileArr[i].setAttribute("data-objekt",tempArray[i])
+        baseTileArr[i].innerHTML=tempArray[i];
     }
 }

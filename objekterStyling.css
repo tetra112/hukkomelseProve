@@ -1,22 +1,25 @@
+
+    
 #screen{
     display: grid;
     width: 100vw;
     height: 100vh;
-    grid-template-columns: repeat(3,1fr);
-    align-items: center;
-    justify-content: center;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(12,1fr);
 }
 #bord {
     display: grid;
-    grid-column-start: 2;
-    width: 500px;
-    height: 500px;
+    grid-column-start: 5;
+    grid-column-end: 9;
+    grid-row-start: 4;
+    grid-row-end: 11;
     grid-template-columns: repeat(6,1fr);
     border: 1px solid black;
 }
 [data-klasse="antallTrykkBox"]{
     display: flex;
-    grid-column-start: 3;
+    grid-column-start: 9;
+    grid-row-start: 4;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
@@ -28,18 +31,31 @@
 }
 [data-klasse="baseTile"] {
     display: flex;
-    border: 1px solid black;
     align-items: center;
     justify-content: center;
     margin: 5px;
     transition-duration: 1s;
+    vertical-align: top;
 }
 [data-status="hidden"]{
     background-color: rgb(51, 30, 30);
+    color: rgba(0,0,0,0);
 }
 [data-status="open"]{
     background-color: lightblue;
 }
 [data-status="locked"]{
     background-color: lightgreen;
+}
+[data-klasse="victory"]{
+    display: flex;
+    background-color: lightseagreen;
+    grid-column-start: 4;
+    grid-column-end: 10;
+    grid-row-start: 5;
+    grid-row-end: 10;
+    transition-duration: 1s;
+    font-size: 3rem;
+    align-items: center;
+    justify-content: center;
 }

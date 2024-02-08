@@ -8,6 +8,7 @@
     </head>
         <body id="screen">
             <div id="bord"></div>
+            <button id="seier">instant seier</button>
         </body>
 </html>
 <script>
@@ -32,7 +33,21 @@
     antallForsokEl.innerHTML = antallTrykkVar;
     screenEl.appendChild(antallForsokEl)
 
-
 // genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
-    genVerdier() 
+    genVerdier()
+
+   
+// Victory screen 
+    let victoryScreenEl = document.createElement("div")
+    screenEl.appendChild(victoryScreenEl)
+
+    function seierF(){
+        victoryScreenEl.setAttribute('data-klasse',"victory")
+        victoryScreenEl.innerHTML=("Gratulerer! du brukte kun: "+ antallTrykkVar + " trykk");
+    }
+
+    let seierEl = document.querySelector("#seier")
+    seierEl.addEventListener('click',seierF) 
+
+
 </script>

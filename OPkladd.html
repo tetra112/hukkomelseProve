@@ -2,10 +2,11 @@
 <html lang="no">
     <head>
         <meta charset="UTF-8">
-        <script src="genererObjektVerdi.js"></script>
+        <link rel="stylesheet" href="objekterStyling.css">
     </head>
         <body id="screen">
             <div id="bord"></div>
+            <button id="seier">instant seier</button>
         </body>
 </html>
 <script>
@@ -23,6 +24,28 @@
         tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
+// lager boxen som viser antall trykka elementer
+    let antallTrykkVar = 0;
+    let antallForsokEl = document.createElement("div");
+    antallForsokEl.setAttribute('data-klasse',"antallTrykkBox")
+    antallForsokEl.innerHTML = antallTrykkVar;
+    screenEl.appendChild(antallForsokEl)
+
+// genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
+    genVerdier()
+
+   
+// Victory screen 
+    let victoryScreenEl = document.createElement("div")
+    screenEl.appendChild(victoryScreenEl)
+
+    function seierF(){
+        victoryScreenEl.setAttribute('data-klasse',"victory")
+        victoryScreenEl.innerHTML=("Gratulerer! du brukte kun: "+ antallTrykkVar + " trykk");
+    }
+
+    let seierEl = document.querySelector("#seier")
+    seierEl.addEventListener('click',seierF) 
     // bytter data-status på clicket element til "open"
 // setter også verdien på data-objekt som innerHTML
 
@@ -33,7 +56,6 @@ function clickHandler(a){
     }else{
         opdaterAntallTrykk();
         this.setAttribute('data-status', "open");
-        this.innerHTML = this.getAttribute('data-objekt');
         var antallOpenEl = document.querySelectorAll('[data-status="open"]')
 
         if(antallOpenEl.length == 2){ // vis 2 elementer er åpne kjør følgende:
@@ -41,15 +63,17 @@ function clickHandler(a){
         }else if(antallOpenEl.length > 2){
             for(i=0;i<antallOpenEl.length;i++){
                 antallOpenEl[i].setAttribute('data-status',"hidden")
-                antallOpenEl[i].innerHTML = "";
             } 
         }
-    } 
-}
-    function opdaterAntallTrykk(){
-        antallTrykkVar++;
-        antallForsokEl.innerHTML = antallTrykkVar;
     }
+    checkVictory() 
+}
+
+// opdaterer antallForsok
+function opdaterAntallTrykk(){
+    antallTrykkVar++;
+    antallForsokEl.innerHTML = antallTrykkVar;
+}
 
 // kjekker om 2 åpna tiles er samme objekt, og bytter status
 function sammenlignF(array){   
@@ -59,9 +83,7 @@ function sammenlignF(array){
             if(tempf1 != tempf2){
                 setTimeout(()=>{
                     array[0].setAttribute('data-status',"hidden")
-                    array[0].innerHTML = "";
                     array[1].setAttribute('data-status',"hidden")
-                    array[1].innerHTML = "";
                 },500)                                             // <- antall milisekunder tilen skal vises før den blir 'hidden' 
     // vis objekt verdien er lik: setter statusen dems som låst 
             }else if(tempf1 == tempf2){
@@ -70,38 +92,68 @@ function sammenlignF(array){
             }
         }        
 
+function checkVictory(){
+    let lockedEl = document.querySelectorAll('[data-status="locked"]')
+    if(lockedEl.length == 36){
+        seierF()
+    }
+}
+// funkjon som shufftler input arrayen 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }    
+    linkDivVerdi()
+}
 
-// genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
-    genVerdier() 
 
-    let antallTrykkVar = 0;
-    let antallForsokEl = document.createElement("div");
-    antallForsokEl.setAttribute('data-klasse',"antallTrykkBox")
-    antallForsokEl.innerHTML = antallTrykkVar;
-    screenEl.appendChild(antallForsokEl)
+// lager en Array med dupliserte tall fra 1-18 + caller på shuffleArray funksjonen
+function genVerdier(){
+    tempArray=[];
+    for(i=0;i<18;i++){
+        pushTemp = i+1;
+        tempArray.push(pushTemp);
+        tempArray.push(pushTemp);
+    }
+    shuffleArray(tempArray)
+}
+
+
+// gir verdien til <div> elementene
+function linkDivVerdi(){
+    for(i=0;i<36;i++){
+        var baseTileArr = document.querySelectorAll('[data-klasse="baseTile"]')
+        baseTileArr[i].setAttribute("data-objekt",tempArray[i])
+        baseTileArr[i].innerHTML=tempArray[i];
+    }
+}
+
 
 </script>
 <style>
+    
     
 #screen{
     display: grid;
     width: 100vw;
     height: 100vh;
-    grid-template-columns: repeat(3,1fr);
-    align-items: center;
-    justify-content: center;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(12,1fr);
 }
 #bord {
     display: grid;
-    grid-column-start: 2;
-    width: 500px;
-    height: 500px;
+    grid-column-start: 5;
+    grid-column-end: 9;
+    grid-row-start: 4;
+    grid-row-end: 11;
     grid-template-columns: repeat(6,1fr);
     border: 1px solid black;
 }
 [data-klasse="antallTrykkBox"]{
     display: flex;
-    grid-column-start: 3;
+    grid-column-start: 9;
+    grid-row-start: 4;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
@@ -113,20 +165,33 @@ function sammenlignF(array){
 }
 [data-klasse="baseTile"] {
     display: flex;
-    border: 1px solid black;
     align-items: center;
     justify-content: center;
     margin: 5px;
     transition-duration: 1s;
+    vertical-align: top;
 }
 [data-status="hidden"]{
     background-color: rgb(51, 30, 30);
+    color: rgba(0,0,0,0);
 }
 [data-status="open"]{
     background-color: lightblue;
+    
 }
 [data-status="locked"]{
     background-color: lightgreen;
 }
-
+[data-klasse="victory"]{
+    display: flex;
+    background-color: lightseagreen;
+    grid-column-start: 4;
+    grid-column-end: 10;
+    grid-row-start: 5;
+    grid-row-end: 10;
+    transition-duration: 1s;
+    font-size: 3rem;
+    align-items: center;
+    justify-content: center;
+}
 </style>
