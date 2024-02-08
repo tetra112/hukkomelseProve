@@ -25,6 +25,13 @@
         tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
+// lager boxen som viser antall trykka elementer
+    let antallTrykkVar = 0;
+    let antallForsokEl = document.createElement("div");
+    antallForsokEl.setAttribute('data-klasse',"antallTrykkBox")
+    antallForsokEl.innerHTML = antallTrykkVar;
+    screenEl.appendChild(antallForsokEl)
+
 
 // genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
     genVerdier() 

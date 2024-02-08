@@ -6,6 +6,7 @@ function clickHandler(a){
     if(checkLocked == 'locked'){
         console.log("locked")
     }else{
+        opdaterAntallTrykk();
         this.setAttribute('data-status', "open");
         this.innerHTML = this.getAttribute('data-objekt');
         var antallOpenEl = document.querySelectorAll('[data-status="open"]')
@@ -18,8 +19,15 @@ function clickHandler(a){
                 antallOpenEl[i].innerHTML = "";
             } 
         }
-} 
+    } 
 }
+
+// opdaterer antallForsok
+function opdaterAntallTrykk(){
+    antallTrykkVar++;
+    antallForsokEl.innerHTML = antallTrykkVar;
+}
+
 // kjekker om 2 åpna tiles er samme objekt, og bytter status
 function sammenlignF(array){   
             tempf1 = array[0].getAttribute('data-objekt');

@@ -1,20 +1,32 @@
-
 #screen{
-    display: flex;
+    display: grid;
     width: 100vw;
     height: 100vh;
+    grid-template-columns: repeat(3,1fr);
     align-items: center;
     justify-content: center;
 }
 #bord {
     display: grid;
+    grid-column-start: 2;
     width: 500px;
     height: 500px;
     grid-template-columns: repeat(6,1fr);
     border: 1px solid black;
-
 }
-div[data-klasse="baseTile"] {
+[data-klasse="antallTrykkBox"]{
+    display: flex;
+    grid-column-start: 3;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 5px;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
+[data-klasse="baseTile"] {
     display: flex;
     border: 1px solid black;
     align-items: center;
