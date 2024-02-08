@@ -7,22 +7,14 @@
         <script src="clickHandlerScript.js"></script>
     </head>
         <body id="screen">
-            <div id="totalClick">Du har trykket 0 ganger</div>
             <div id="bord"></div>
-            <div></div>
         </body>
 </html>
 <script>
 // henter inn elementer    
     let screenEl = document.querySelector("#screen")
-
-    let totalClickEl = document.querySelector("#totalClick")
-    let totalClick = 0;
-
     let bordEl = document.querySelector("#bord")
     screenEl.appendChild(bordEl)
-// Variabler
-    let tempArr = [];
 
 // genererer <div> elementer
     for (i=0;i<36;i++){
@@ -33,7 +25,14 @@
         tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
+// lager boxen som viser antall trykka elementer
+    let antallTrykkVar = 0;
+    let antallForsokEl = document.createElement("div");
+    antallForsokEl.setAttribute('data-klasse',"antallTrykkBox")
+    antallForsokEl.innerHTML = antallTrykkVar;
+    screenEl.appendChild(antallForsokEl)
 
-// kjører funksjoner
-    genVerdier() // 'genererObjektVerdi.js'
+
+// genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
+    genVerdier() 
 </script>
