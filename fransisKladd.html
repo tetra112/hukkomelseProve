@@ -1,57 +1,39 @@
-<html>
+<!DOCTYPE html>
+<html lang="no">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="objekterStyling.css">
+        <script src="genererObjektVerdi.js"></script>
+        <script src="clickHandlerScript.js"></script>
     </head>
-    <body id="bord">
-        
-    </body>
+        <body id="screen">
+            <div id="totalClick">Du har trykket 0 ganger</div>
+            <div id="bord"></div>
+            <div></div>
+        </body>
 </html>
 <script>
-let bordEl = document.querySelector("#bord")
-let tileArray = [];
-let array1 = []
-let array2 = []
+// henter inn elementer    
+    let screenEl = document.querySelector("#screen")
 
-async function getAPI(){
-    let cardsAPI = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=18");
-    let cardsJson = await cardsAPI.json();
-    let cards = cardsJson.cards
-}
-for (i=0; i<cards.length; i++){
-    array1.push(cards.value)
-}
+    let totalClickEl = document.querySelector("#totalClick")
+    let totalClick = 0;
 
+    let bordEl = document.querySelector("#bord")
+    screenEl.appendChild(bordEl)
+// Variabler
+    let tempArr = [];
+
+// genererer <div> elementer
     for (i=0;i<36;i++){
         let tileEl = document.createElement("div")
         tileEl.dataset.klasse = "baseTile";
         tileEl.dataset.status = "hidden";
-        tileEl.addEventListener("click",()=> dataset.status="open")
-        tileArray.push(tileEl)
+        tileEl.dataset.posisjon = [i];
+        tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
 
-
-
+// kjører funksjoner
+    genVerdier() // 'genererObjektVerdi.js'
 </script>
-
-<style>
-#bord {
-    display: grid;
-    width: 500px;
-    height: 500px;
-    grid-template-columns: repeat(6,1fr);
-    border: 1px solid black;
-}
-div[data-klasse="baseTile"] {
-    display: flex;
-    border: 1px solid black;
-}
-[data-status="hidden"]{
-    margin: 5px;
-    background-color: aqua;
-}
-[data-status="open"]{
-    margin: 5px;
-    background-color: blue;
-}
-</style>
