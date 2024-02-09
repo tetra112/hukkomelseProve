@@ -49,5 +49,27 @@
     let seierEl = document.querySelector("#seier")
     seierEl.addEventListener('click',seierF) 
 
+    // lager knapp som skal starte ett nytt spill
+    let nyttSpillEl = document.createElement("div");
+    nyttSpillEl.setAttribute('data-klasse', "nyttSpill")
+    nyttSpillEl.innerHTML = `<h2>Nytt spill</h2>`
+    screenEl.appendChild(nyttSpillEl)
+    nyttSpillEl.addEventListener("click", nyttSpill)
 
+    //funksjonen som skal starte spillet på nytt (kjører alt på nytt)
+    function nyttSpill(){
+        bordEl.innerHTML = ""
+
+        for (i=0;i<36;i++){
+        let tileEl = document.createElement("div")
+        tileEl.dataset.klasse = "baseTile";
+        tileEl.dataset.status = "hidden";
+        tileEl.dataset.posisjon = [i];
+        tileEl.addEventListener("click",clickHandler)
+        bordEl.appendChild(tileEl)
+    }
+    genVerdier()
+    antallTrykkVar = 0
+    antallForsokEl.innerHTML = antallTrykkVar
+    }
 </script>

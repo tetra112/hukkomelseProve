@@ -44,6 +44,33 @@
 [data-status="open"]{
     background-color: lightblue;
 }
+[data-klasse="nyttSpill"]{
+    display: flex;
+    grid-area: 4/4/4/4;
+    justify-self: right;
+    border: 2px solid black;
+    outline: 1px white solid;
+    outline-offset: -3px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    height: max-content;
+    width: max-content;
+    background-color: lightcyan;
+    transition-duration: 0.5s;
+}
+[data-klasse="nyttSpill"]:hover{
+    transition-duration: 0.5s;
+    background-color: greenyellow;
+    cursor:pointer;
+}
+[data-klasse="nyttSpill"] > h2{
+    color: black;
+    font-size: 2rem;
+    -webkit-text-stroke: 0.25px white;
+}
 [data-status="locked"]{
     background-color: lightgreen;
 }

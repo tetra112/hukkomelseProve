@@ -28,7 +28,7 @@
 }
 [data-klasse="nyttSpill"]{
     display: flex;
-    grid-column-start: 1;
+    grid-area: 4/3/4/4;
     justify-self: right;
     border: 2px solid black;
     outline: 1px white solid;
@@ -38,8 +38,8 @@
     font-weight: bold;
     margin-right: 1rem;
     padding: 1rem;
-    height: auto;
-    width: auto;
+    height: max-content;
+    width: max-content;
     background-color: lightcyan;
 }
 [data-klasse="nyttSpill"]:hover{
