@@ -8,7 +8,6 @@
     </head>
         <body id="screen">
             <div id="bord"></div>
-            <button id="seier">instant seier</button>
         </body>
 </html>
 <script>
@@ -18,6 +17,7 @@
     screenEl.appendChild(bordEl)
 
 // genererer <div> elementer
+function genDivEl(){
     for (i=0;i<36;i++){
         let tileEl = document.createElement("div")
         tileEl.dataset.klasse = "baseTile";
@@ -26,15 +26,19 @@
         tileEl.addEventListener("click",clickHandler)
         bordEl.appendChild(tileEl)
     }
+}
 // lager boxen som viser antall trykka elementer
     let antallTrykkVar = 0;
     let antallForsokEl = document.createElement("div");
     antallForsokEl.setAttribute('data-klasse',"antallTrykkBox")
-    antallForsokEl.innerHTML = antallTrykkVar;
+    antallForsokEl.innerHTML = '<h2>'+antallTrykkVar+'</h2>';
     screenEl.appendChild(antallForsokEl)
 
 // genererer objektVerdi til <div> elementene - se 'genererObjektVerdi.js'
+    genDivEl()
     genVerdier()
+
+// lager knapp som printer Victory screen
 
    
 // Victory screen 
@@ -46,12 +50,19 @@
         victoryScreenEl.innerHTML=("Gratulerer! du brukte kun: "+ antallTrykkVar + " trykk");
     }
 
-    let seierEl = document.querySelector("#seier")
-    seierEl.addEventListener('click',seierF) 
+// lager knapp som printer Victory screen
+    let seierEl = document.createElement('button')
+    seierEl.setAttribute('data-klasse','funksjonKnapp')
+    seierEl.setAttribute('data-knapp','seier')
+    seierEl.innerHTML='<h2>Seier</h2>'
+    seierEl.addEventListener('click',seierF)
+    screenEl.appendChild(seierEl)
+
 
     // lager knapp som skal starte ett nytt spill
     let nyttSpillEl = document.createElement("div");
-    nyttSpillEl.setAttribute('data-klasse', "nyttSpill")
+    nyttSpillEl.setAttribute('data-klasse', "funksjonKnapp")
+    nyttSpillEl.setAttribute('data-knapp','nyttSpill')
     nyttSpillEl.innerHTML = `<h2>Nytt spill</h2>`
     screenEl.appendChild(nyttSpillEl)
     nyttSpillEl.addEventListener("click", nyttSpill)
@@ -60,16 +71,11 @@
     function nyttSpill(){
         bordEl.innerHTML = ""
 
-        for (i=0;i<36;i++){
-        let tileEl = document.createElement("div")
-        tileEl.dataset.klasse = "baseTile";
-        tileEl.dataset.status = "hidden";
-        tileEl.dataset.posisjon = [i];
-        tileEl.addEventListener("click",clickHandler)
-        bordEl.appendChild(tileEl)
-    }
-    genVerdier()
+        victoryScreenEl.removeAttribute('data-klasse')
+        victoryScreenEl.innerHTML="";
+        genDivEl()
+        genVerdier()
     antallTrykkVar = 0
-    antallForsokEl.innerHTML = antallTrykkVar
+    antallForsokEl.innerHTML = antallTrykkVar;
     }
 </script>
