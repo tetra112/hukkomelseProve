@@ -35,6 +35,7 @@
     margin: 5px;
     transition-duration: 1s;
     vertical-align: top;
+    font-size: 2rem;
 }
 [data-status="hidden"]{
     background-color: rgb(51, 30, 30);
