@@ -19,7 +19,6 @@ function genVerdier(){
     shuffleArray(tempArray)
 }
 
-
 // gir verdien til <div> elementene
 function linkDivVerdi(){
     for(i=0;i<36;i++){
